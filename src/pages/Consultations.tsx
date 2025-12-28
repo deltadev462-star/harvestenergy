@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ChevronDown, ChevronUp, Clipboard, CheckCircle, FileSearch, Shield, Wrench, Recycle, AlertTriangle, Trash2 } from 'lucide-react'
+import { ChevronDown, ChevronUp, Clipboard, CheckCircle, FileSearch, Shield, Recycle, AlertTriangle, Trash2 } from 'lucide-react'
 
 const Consultations = () => {
   const [activeSection, setActiveSection] = useState<string>('')

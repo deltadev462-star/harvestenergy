@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { GraduationCap, Users, BookOpen, Award, Target, Lightbulb } from 'lucide-react'
+import { GraduationCap, Users, BookOpen, Award, Target, Lightbulb, Shield } from 'lucide-react'
 
 const Training = () => {
   useEffect(() => {

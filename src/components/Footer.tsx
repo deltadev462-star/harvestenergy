@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { MapPin, Phone, Mail, Globe, ExternalLink } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 
 const Footer = () => {
   const footerNavigation = {

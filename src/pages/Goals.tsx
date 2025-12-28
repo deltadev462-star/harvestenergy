@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Target, CheckCircle, TrendingUp, Users, Lightbulb, Shield } from 'lucide-react'
+import { CheckCircle, TrendingUp, Users, Lightbulb, Shield } from 'lucide-react'
 
 const Goals = () => {
   useEffect(() => {
