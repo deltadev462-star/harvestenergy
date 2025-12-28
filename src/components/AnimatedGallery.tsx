@@ -149,39 +149,43 @@ const AnimatedGallery = ({ items }: { items: GalleryItem[] }) => {
       <AnimatePresence>
         {selectedId && selectedItem && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop - Enhanced for mobile */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/90 z-40"
+              className="fixed inset-0 bg-black/90 z-40 touch-manipulation"
               onClick={() => setSelectedId(null)}
+              onTouchEnd={() => setSelectedId(null)}
             />
 
-            {/* Modal Content */}
+            {/* Modal Content - Enhanced for mobile */}
             <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 touch-manipulation"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onClick={() => setSelectedId(null)}
             >
-              {/* Close Button */}
+              {/* Close Button - Enhanced for mobile */}
               <button
                 onClick={() => setSelectedId(null)}
-                className="absolute top-4 right-4 p-2 text-white hover:bg-white/10 rounded-full transition-colors z-10"
+                className="absolute top-4 right-4 p-3 sm:p-2 text-white bg-black/50 hover:bg-black/70 rounded-full transition-all z-10 touch-manipulation"
+                aria-label="Close image"
               >
-                <X size={24} />
+                <X size={28} className="sm:w-6 sm:h-6" />
               </button>
 
-              {/* Navigation Buttons */}
+              {/* Navigation Buttons - Enhanced for mobile */}
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   handlePrevious()
                 }}
-                className="absolute left-4 p-3 text-white hover:bg-white/10 rounded-full transition-colors z-10"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-3 sm:p-3 text-white bg-black/50 hover:bg-black/70 rounded-full transition-all z-10 touch-manipulation"
+                aria-label="Previous image"
               >
-                <ChevronLeft size={30} />
+                <ChevronLeft size={32} className="sm:w-[30px] sm:h-[30px]" />
               </button>
 
               <button
@@ -189,9 +193,10 @@ const AnimatedGallery = ({ items }: { items: GalleryItem[] }) => {
                   e.stopPropagation()
                   handleNext()
                 }}
-                className="absolute right-4 p-3 text-white hover:bg-white/10 rounded-full transition-colors z-10"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-3 sm:p-3 text-white bg-black/50 hover:bg-black/70 rounded-full transition-all z-10 touch-manipulation"
+                aria-label="Next image"
               >
-                <ChevronRight size={30} />
+                <ChevronRight size={32} className="sm:w-[30px] sm:h-[30px]" />
               </button>
 
               {/* Main Content with Animation */}
@@ -204,6 +209,7 @@ const AnimatedGallery = ({ items }: { items: GalleryItem[] }) => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <motion.div
                     className="relative rounded-xl overflow-hidden"
