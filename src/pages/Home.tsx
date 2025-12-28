@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Shield, Globe, Users, Award } from 'lucide-react'
 import { useEffect } from 'react'
 import AnimatedGallery from '../components/AnimatedGallery'
+import { motion } from 'framer-motion'
 
 const Home = () => {
   useEffect(() => {
@@ -120,40 +121,214 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Key Features */}
-      <section className="section-padding">
+      {/* Key Features - Enhanced with High-Level Animations */}
+      <section className="section-padding overflow-hidden">
         <div className="container">
-          <h2 className="section-title text-center mb-16">Why Choose Harvest Energy</h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="section-title text-center mb-16"
+          >
+            Why Choose Harvest Energy
+          </motion.h2>
+          
           <div className="grid-responsive">
-            <div className="card hover:shadow-2xl">
-              <div className="card-body">
-                <Shield className="w-12 h-12 text-emerald-600 mb-4" />
+            {/* ISO Certified Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 50, rotateX: -15 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              whileHover={{
+                scale: 1.05,
+                rotateY: 5,
+                transition: { duration: 0.3 }
+              }}
+              className="card hover:shadow-2xl transform-gpu perspective-1000"
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              <motion.div
+                className="card-body relative"
+                whileHover={{ z: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.5,
+                    type: "spring",
+                    stiffness: 200
+                  }}
+                  whileHover={{
+                    rotate: 360,
+                    scale: 1.2,
+                    transition: { duration: 0.8 }
+                  }}
+                  className="inline-block mb-4"
+                >
+                  <Shield className="w-12 h-12 text-emerald-600" />
+                </motion.div>
+                
+                <motion.div
+                  className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full opacity-20 blur-xl"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.2, 0.4, 0.2]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                
                 <h3 className="text-2xl font-bold mb-3">ISO Certified</h3>
                 <p className="text-secondary">
                   First dedicated provider of NORM consulting across the MENA region, GCC, and Africa, established and licensed by the Ministry of Environment and Climate Change.
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
-            <div className="card hover:shadow-2xl">
-              <div className="card-body">
-                <Globe className="w-12 h-12 text-emerald-600 mb-4" />
+            {/* Regional Expertise Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 50, rotateX: -15 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              whileHover={{
+                scale: 1.05,
+                rotateY: -5,
+                transition: { duration: 0.3 }
+              }}
+              className="card hover:shadow-2xl transform-gpu perspective-1000"
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              <motion.div
+                className="card-body relative"
+                whileHover={{ z: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div
+                  initial={{ scale: 0, rotate: 180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.7,
+                    type: "spring",
+                    stiffness: 200
+                  }}
+                  className="inline-block mb-4"
+                >
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  >
+                    <Globe className="w-12 h-12 text-emerald-600" />
+                  </motion.div>
+                </motion.div>
+                
+                <motion.div
+                  className="absolute -bottom-2 -left-2 w-24 h-24 bg-gradient-to-tr from-blue-400 to-emerald-600 rounded-full opacity-20 blur-xl"
+                  animate={{
+                    x: [0, 20, 0],
+                    y: [0, -20, 0],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                
                 <h3 className="text-2xl font-bold mb-3">Regional Expertise</h3>
                 <p className="text-secondary">
                   Extensive experience and presence across the Middle East, Gulf Cooperation Council (GCC) region, and Africa with deep understanding of local regulations.
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
-            <div className="card hover:shadow-2xl">
-              <div className="card-body">
-                <Users className="w-12 h-12 text-emerald-600 mb-4" />
+            {/* Expert Team Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 50, rotateX: -15 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              whileHover={{
+                scale: 1.05,
+                rotateY: 5,
+                transition: { duration: 0.3 }
+              }}
+              className="card hover:shadow-2xl transform-gpu perspective-1000"
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              <motion.div
+                className="card-body relative"
+                whileHover={{ z: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.9,
+                    type: "spring",
+                    stiffness: 200
+                  }}
+                  whileHover={{
+                    scale: 1.1,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="inline-block mb-4 relative"
+                >
+                  <Users className="w-12 h-12 text-emerald-600" />
+                  <motion.div
+                    className="absolute inset-0"
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.5, 0, 0.5]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeOut"
+                    }}
+                  >
+                    <Users className="w-12 h-12 text-emerald-600" />
+                  </motion.div>
+                </motion.div>
+                
+                <motion.div
+                  className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-radial from-emerald-500 via-emerald-400 to-transparent rounded-full opacity-10"
+                  animate={{
+                    scale: [0.8, 1.2, 0.8],
+                    rotate: [0, 180, 360]
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                
                 <h3 className="text-2xl font-bold mb-3">Expert Team</h3>
                 <p className="text-secondary">
                   Highly qualified professionals in radiation protection and environmental management with decades of technical experience and innovative solutions.
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
