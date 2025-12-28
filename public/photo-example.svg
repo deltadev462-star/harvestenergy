@@ -1,0 +1,12 @@
+<svg width="1600" height="1067" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1067" fill="#e5e7eb"/>
+  <text x="800" y="500" font-family="Arial, sans-serif" font-size="48" fill="#6b7280" text-anchor="middle">
+    Harvest Energy Project
+  </text>
+  <text x="800" y="580" font-family="Arial, sans-serif" font-size="32" fill="#9ca3af" text-anchor="middle">
+    Add your photo here
+  </text>
+  <rect x="700" y="400" width="200" height="200" fill="none" stroke="#9ca3af" stroke-width="4" rx="8"/>
+  <path d="M750 480 L800 440 L850 480 L850 550 L750 550 Z" fill="#9ca3af"/>
+  <circle cx="780" cy="470" r="15" fill="#e5e7eb"/>
+</svg>
