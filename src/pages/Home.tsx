@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Shield, Globe, Users, Award } from 'lucide-react'
-import { useEffect } from 'react'
+import { ArrowRight, Shield, Globe, Users, Award, Clipboard, CheckCircle, FileSearch, Recycle, AlertTriangle, Trash2 } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import AnimatedGallery from '../components/AnimatedGallery'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const Home = () => {
   useEffect(() => {
@@ -68,6 +68,251 @@ const Home = () => {
       imageUrl: '/photo-8.jpg'
     }
   ]
+
+  // Interactive Services Component
+  const InteractiveServices = () => {
+    const [activeService, setActiveService] = useState(0)
+    const [isContentVisible, setIsContentVisible] = useState(false)
+
+    const services = [
+      {
+        id: 'norm-surveys',
+        title: 'NORM Surveys and Assessments',
+        icon: Clipboard,
+        image: '/photo-1.jpg',
+        description: 'Comprehensive surveys to identify and evaluate NORM/TENORM presence using advanced monitoring technologies.',
+        highlights: [
+          'Site visits and monitoring evaluation',
+          'Data quality control and analysis',
+          'Trend identification and anomaly detection',
+          'Final certification and reporting'
+        ]
+      },
+      {
+        id: 'compliance',
+        title: 'Regulatory Compliance Reviews',
+        icon: CheckCircle,
+        image: '/photo-2.jpg',
+        description: 'Ensuring full compliance with Ministry of Environment regulations and international safety standards.',
+        highlights: [
+          'Comprehensive compliance audits',
+          'Gap analysis and recommendations',
+          'Risk mitigation strategies',
+          'Regulatory documentation support'
+        ]
+      },
+      {
+        id: 'design',
+        title: 'System Design Evaluation',
+        icon: FileSearch,
+        image: '/photo-3.jpg',
+        description: 'Expert analysis of systems and processes to optimize performance while maintaining safety standards.',
+        highlights: [
+          'NORM source identification',
+          'Ventilation system assessment',
+          'Shielding requirements',
+          'Waste management planning'
+        ]
+      },
+      {
+        id: 'remediation',
+        title: 'Remediation & Decontamination',
+        icon: Recycle,
+        image: '/photo-4.jpg',
+        description: 'Comprehensive remediation solutions for NORM/TENORM contaminated environments.',
+        highlights: [
+          'Site contamination assessment',
+          'Safe material removal',
+          'Specialized decontamination',
+          'Post-remediation monitoring'
+        ]
+      },
+      {
+        id: 'impact',
+        title: 'Radiological Impact Assessment',
+        icon: AlertTriangle,
+        image: '/photo-5.jpg',
+        description: 'Evaluating potential health risks from NORM exposure through multiple pathways.',
+        highlights: [
+          'Exposure pathway analysis',
+          'Risk quantification',
+          'Engineering controls design',
+          'PPE recommendations'
+        ]
+      },
+      {
+        id: 'waste',
+        title: 'Waste Management',
+        icon: Trash2,
+        image: '/photo-6.jpg',
+        description: 'Expert waste management ensuring safe and compliant disposal of NORM-contaminated materials.',
+        highlights: [
+          'Waste characterization',
+          'Regulatory-compliant packaging',
+          'Secure transportation coordination',
+          'Comprehensive documentation'
+        ]
+      }
+    ]
+
+    const handleServiceClick = (index: number) => {
+      setActiveService(index)
+      setIsContentVisible(true)
+    }
+
+    return (
+      <div className="space-y-12">
+        {/* Service Icons Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"
+        >
+          {services.map((service, index) => {
+            const Icon = service.icon
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative group"
+              >
+                <motion.button
+                  onClick={() => handleServiceClick(index)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`w-full aspect-square rounded-xl p-6 transition-all duration-300 ${
+                    activeService === index
+                      ? 'bg-emerald-600 text-white shadow-xl'
+                      : 'bg-white shadow-lg hover:shadow-xl group-hover:bg-emerald-50'
+                  }`}
+                >
+                  <div className="flex flex-col items-center justify-center h-full space-y-3">
+                    <motion.div
+                      animate={activeService === index ? { rotate: 360 } : { rotate: 0 }}
+                      transition={{ duration: 0.8 }}
+                    >
+                      <Icon className={`w-10 h-10 ${
+                        activeService === index ? 'text-white' : 'text-emerald-600'
+                      }`} />
+                    </motion.div>
+                    <h3 className={`text-sm font-bold text-center leading-tight ${
+                      activeService === index ? 'text-white' : 'text-primary'
+                    }`}>
+                      {service.title}
+                    </h3>
+                  </div>
+                  
+                  {/* Active Indicator */}
+                  {activeService === index && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2"
+                    >
+                      <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-emerald-600" />
+                    </motion.div>
+                  )}
+                </motion.button>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+
+        {/* Service Content Display */}
+        <AnimatePresence mode="wait">
+          {isContentVisible && (
+            <motion.div
+              key={activeService}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-2xl shadow-xl overflow-hidden"
+            >
+              <div className="grid md:grid-cols-2 gap-0">
+                {/* Image Side */}
+                <motion.div
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="relative h-[400px] md:h-full"
+                >
+                  <img
+                    src={services[activeService].image}
+                    alt={services[activeService].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-8">
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.4 }}
+                    >
+                      {(() => {
+                        const IconComponent = services[activeService].icon
+                        return <IconComponent className="w-16 h-16 text-white mb-4" />
+                      })()}
+                      <h3 className="text-3xl font-bold text-white mb-2">
+                        {services[activeService].title}
+                      </h3>
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                {/* Content Side */}
+                <motion.div
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="p-8 md:p-12"
+                >
+                  <p className="text-lg text-secondary mb-8">
+                    {services[activeService].description}
+                  </p>
+                  
+                  <h4 className="text-xl font-bold mb-6">Key Features:</h4>
+                  
+                  <ul className="space-y-4 mb-8">
+                    {services[activeService].highlights.map((highlight, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ x: 20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                        className="flex items-start gap-3"
+                      >
+                        <Shield className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-1" />
+                        <span className="text-secondary">{highlight}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.8 }}
+                  >
+                    <Link
+                      to="/consultations"
+                      className="btn btn-primary inline-flex items-center gap-2"
+                    >
+                      Learn More
+                      <ArrowRight size={18} />
+                    </Link>
+                  </motion.div>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -365,6 +610,25 @@ const Home = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Services Section */}
+      <section className="section-padding">
+        <div className="container">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="section-title text-center mb-16"
+            >
+              Our Core Services
+            </motion.h2>
+
+            <InteractiveServices />
           </div>
         </div>
       </section>
